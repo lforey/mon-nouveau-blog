@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+    <title>Centre d'entraînement</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+    <style>
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        .page-header {
+            background-color: #6d1120;
+            padding: 10px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .page-header h1,
+        .page-header h1 a,
+        .page-header h1 a:visited,
+        .page-header h1 a:active {
+            color: #ffffff;
+            font-size: 30pt;
+            text-decoration: none;
+        }
+
+        .content {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h1,
+        .content h2 {
+            color: #6d1120;
+            text-align: center;
+        }
+
+        a {
+            color: #428bca;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: #2a6496;
+        }
+
+        .player-card {
+            border: 2px solid #6d1120;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            transition: box-shadow 0.3s ease-in-out;
+            text-align: center;
+        }
+
+        .player-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .player-photo {
+            width: 100%; /* Updated to make the image full-width within the container */
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .activity-card {
+            border: 2px solid #6d1120;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            transition: box-shadow 0.3s ease-in-out;
+            text-align: center;
+        }
+
+        .activity-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .activity-photo {
+            width: 100%; /* Updated to make the image full-width within the container */
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+    {% if player.id_play %}
+    <a href="{% url 'play_detail' id_play=player.id_play %}" style="color: #428bca;">{{ player.id_play }}</a>
+    {% endif %}
+    <div class="page-header">
+        <h1><a href="/" style="color: #ffffff;">Centre d'entraînement de Centrale Marseille/Saison 2023-2024</a></h1>
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                <div>
+                    <h1><a href="/" style="color: #6d1120;">Liste des joueurs du centre :</a></h1>
+                </div>
+                 
+                {% for player in player %}
+                    <div class="player-card">
+                        <h2><a href="{% url 'play_detail' id_play=player.id_play %}" style="color: #6d1120;">{{ player.prenom }} {{ player.nom }}</a></h2>
+                        
+                        <img class="player-photo" src="{{player.photo|linebreaksbr }}" alt="Player Photo">
+                        <p>{{ player.id_play|linebreaksbr }}</p>
+                        <p>{{ player.age|linebreaksbr }}</p>
+                        <p>{{ player.activity|linebreaksbr }}</p>
+                        <p>{{ player.etat|linebreaksbr }}</p>
+                    </div>
+                {% endfor %}
+
+ 
